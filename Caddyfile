@@ -1,0 +1,4 @@
+local.rachellefabian.com {
+	tls internal
+	reverse_proxy webserver:80
+}

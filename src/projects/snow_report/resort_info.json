@@ -1,0 +1,421 @@
+{
+    "Adelboden": {
+        "url": "https://www.bergfex.com/adelboden/schneebericht/",
+        "region":"Bernese Oberland"
+    },
+    
+    "Aela / Maloja": {
+        "url": "https://www.bergfex.com/aela-maloja/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Aletsch Arena / Riederalp - Bettmeralp - Fiesch-Eggishorn": {
+        "url": "https://www.bergfex.com/aletsch-arena/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Amden": {
+        "url": "https://www.bergfex.com/amden/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Andermatt - Gemsstock": {
+        "url": "https://www.bergfex.com/andermatt-gemsstock/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Andermatt - Oberalp - Sedrun": {
+        "url": "https://www.bergfex.com/andermatt-oberalp-sedrun/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Arosa Lenzerheide": {
+        "url": "https://www.bergfex.com/arosa-lenzerheide/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Avers": {
+        "url": "https://www.bergfex.com/avers/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Belalp": {
+        "url": "https://www.bergfex.com/belalp/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Bellwald": {
+        "url": "https://www.bergfex.com/bellwald/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Bivio": {
+        "url": "https://www.bergfex.com/bivio/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Bosco Gurin": {
+        "url": "https://www.bergfex.com/bosco-gurin/schneebericht/",
+        "region": "Ticino"
+    },
+
+    "Braunwald": {
+        "url": "https://www.bergfex.com/braunwald/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Bruson - Verbier": {
+        "url": "https://www.bergfex.com/bruson-verbier/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Bügls - S-chanf": {
+        "url": "https://www.bergfex.com/buegls-s-chanf/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Charmey": {
+        "url": "https://www.bergfex.com/charmey/schneebericht/",
+        "region": "Fribourg"
+    },
+
+    "Confin / San Bernardino": {
+        "url": "https://www.bergfex.com/confin-san-bernardino/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Corvatsch - Furtschellas": {
+        "url": "https://www.bergfex.com/corvatsch-furtschellas/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Corviglia / St. Moritz": {
+        "url": "https://www.bergfex.com/corviglia-st-moritz/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Crans - Montana": {
+        "url": "https://www.bergfex.com/crans-montana/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Davos Jakobshorn": {
+        "url": "https://www.bergfex.com/davos-jakobshorn/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Davos Klosters Parsenn": {
+        "url": "https://www.bergfex.com/davos-klosters-parsenn/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Davos Pischa": {
+        "url": "https://www.bergfex.com/davos-pischa/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Davos Rinerhorn": {
+        "url": "https://www.bergfex.com/davos-rinerhorn/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Davos Schatzalp - Strela": {
+        "url": "https://www.bergfex.com/davos-schatzalp-strela/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Diavolezza - Lagalb": {
+        "url": "https://www.bergfex.com/diavolezza-lagalb/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Elm": {
+        "url": "https://www.bergfex.com/elm/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Engelberg Titlis": {
+        "url": "https://www.bergfex.com/engelberg-titlis/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Feldis": {
+        "url": "https://www.bergfex.com/feldis/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Flims Laax Falera": {
+        "url": "https://www.bergfex.com/flims-laax-falera/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Flumserberg": {
+        "url": "https://www.bergfex.com/flumserberg/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Gantrisch - Gurnigel": {
+        "url": "https://www.bergfex.com/gantrisch-gurnigel/schneebericht/",
+        "region": "Swiss Plateau"
+    },
+
+    "Glacier 3000 - Les Diablerets": {
+        "url": "https://www.bergfex.com/glacier-3000-les-diablerets/schneebericht/",
+        "region": "Vaud"
+    },
+
+    "Grimentz - Zinal": {
+        "url": "https://www.bergfex.com/grimentz-zinal/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Grüsch Danusa": {
+        "url": "https://www.bergfex.com/gruesch-danusa/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Gstaad": {
+        "url": "https://www.bergfex.com/gstaad/schneebericht/",
+        "region": "Bernese Oberland"
+    },
+
+    "Hemberg": {
+        "url": "https://www.bergfex.com/hemberg/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Hoch-Ybrig": {
+        "url": "https://www.bergfex.com/hoch-ybrig/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Jaun Gastlosen": {
+        "url": "https://www.bergfex.com/jaun-gastlosen/schneebericht/",
+        "region": "Fribourg"
+    },
+
+    "Klosters Madrisa": {
+        "url": "https://www.bergfex.com/klosters-madrisa/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "La Punt - Müsella": {
+        "url": "https://www.bergfex.com/la-punt-muesella/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "La Robella": {
+        "url": "https://www.bergfex.com/la-robella/schneebericht/",
+        "region": "Jura"
+    },
+
+    "La Tzoumaz - Mayens de Riddes": {
+        "url": "https://www.bergfex.com/la-tzoumaz-mayens-de-riddes/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Languard / Pontresina": {
+        "url": "https://www.bergfex.com/languard-pontresina/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Lauchernalp - Lötschental": {
+        "url": "https://www.bergfex.com/lauchernalp-loetschental/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Le Pâquier / Crêt-du-Puy": {
+        "url": "https://www.bergfex.com/le-paquier-cret-du-puy/schneebericht/",
+        "region": "Jura"
+    },
+
+    "Lenk": {
+        "url": "https://www.bergfex.com/lenk/schneebericht/",
+        "region": "Bernese Oberland"
+    },
+
+    "Les Breuleux": {
+        "url": "https://www.bergfex.com/les-breuleux/schneebericht/",
+        "region": "Jura"
+    },
+
+    "Les Bugnenets - Savagnières": {
+        "url": "https://www.bergfex.com/les-bugnenets-savagnieres/schneebericht/",
+        "region": "Jura"
+    },
+
+    "Les Diablerets - Glacier 3000": {
+        "url": "https://www.bergfex.com/les-diablerets-glacier-3000/schneebericht/",
+        "region": "Vaud"
+    },
+
+    "Les Genevez": {
+        "url": "https://www.bergfex.com/les-genevez/schneebericht/",
+        "region": "Jura"
+    },
+
+    "Leysin - Les Mosses - La Lécherette": {
+        "url": "https://www.bergfex.com/leysin-les-mosses-la-lecherette/schneebericht/",
+        "region": "Vaud"
+    },
+
+    "Meiringen - Hasliberg": {
+        "url": "https://www.bergfex.com/meiringen-hasliberg/schneebericht/",
+        "region": "Bernese Oberland"
+    },
+
+    "Melchsee - Frutt": {
+        "url": "https://www.bergfex.com/melchsee-frutt/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Minschuns - Val Müstair": {
+        "url": "https://www.bergfex.com/minschuns-val-muestair/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Moosalpregion": {
+        "url": "https://www.bergfex.com/moosalpreigion/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Muottas Muragl": {
+        "url": "https://www.bergfex.com/muottas-muragl/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Obergoms / Goms": {
+        "url": "https://www.bergfex.com/obergoms-goms/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Oberhelfenschwil": {
+        "url": "https://www.bergfex.com/oberhelfenschwil/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Obersaxen Mundaun": {
+        "url": "https://www.bergfex.com/obersaxen-mundaun/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Ovronnaz": {
+        "url": "https://www.bergfex.com/ovronnaz/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Pian Cales / San Bernardino": {
+        "url": "https://www.bergfex.com/pian-cales-san-bernardino/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Realp": {
+        "url": "https://www.bergfex.com/realp/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Saas Almagell": {
+        "url": "https://www.bergfex.com/saas-almagell/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Saas Grund - Hohsaas": {
+        "url": "https://www.bergfex.com/saas-grund-hohsass/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Saas-Fee": {
+        "url": "https://www.bergfex.com/saas-fee/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Savognin": {
+        "url": "https://www.bergfex.com/savognin/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Schwarzenbühl / Selital": {
+        "url": "https://www.bergfex.com/schwarzenbuehl-selital/schneebericht/",
+        "region": "Swiss Plateau"
+    },
+
+    "Schwarzsee / Kaiseregg Bahnen": {
+        "url": "https://www.bergfex.com/schwarzsee-kaiseregg-bahnen/schneebericht/",
+        "region": "Fribourg"
+    },
+
+    "Scuol Motta Naluns": {
+        "url": "https://www.bergfex.com/scuol-motta-naluns/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Silvretta Arena Samnaun / Ischgl": {
+        "url": "https://www.bergfex.com/silvretta-arena-samnaun-ischgl/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Sörenberg": {
+        "url": "https://www.bergfex.com/soerenberg/schneebericht/",
+        "region": "Central Switzerland"
+    },
+
+    "Survih - Samedan": {
+        "url": "https://www.bergfex.com/survih-samedan/schneebericht/",
+        "region": "Graubünden"
+    },
+
+    "Tanzboden / Ebnat-Kappel": {
+        "url": "https://www.bergfex.com/tanzboden-ebnat-kappel/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Thyon / 4 Vallées": {
+        "url": "https://www.bergfex.com/thyon-4-vallees/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Toggenburg / Wildhaus": {
+        "url": "https://www.bergfex.com/toggenburg-wildhaus/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Urnäsch / Osteregg": {
+        "url": "https://www.bergfex.com/urnaesch-osteregg/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Verbier / 4 Vallées": {
+        "url": "https://www.bergfex.com/verbier-4-vallees/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Villars - Gryon - Les Diablerets": {
+        "url": "https://www.bergfex.com/villars-gryon-les-diablerets/schneebericht/",
+        "region": "Vaud"
+    },
+
+    "Visperterminen": {
+        "url": "https://www.bergfex.com/visperterminen/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Wiriehorn / Diemtigtal": {
+        "url": "https://www.bergfex.com/wiriehorn-diemtigtal/schneebericht/",
+        "region": "Bernese Oberland"
+    },
+
+    "Wolzenalp / Krummenau": {
+        "url": "https://www.bergfex.com/wolzenalp-krummenau/schneebericht/",
+        "region": "Ostschweiz"
+    },
+
+    "Zermatt": {
+        "url": "https://www.bergfex.com/zermatt/schneebericht/",
+        "region": "Valais"
+    },
+
+    "Zuoz": {
+        "url": "https://www.bergfex.com/zuoz/schneebericht/",
+        "region": "Graubünden"
+    }
+}

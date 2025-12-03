@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Rachelle Fabian Portfolio</title>
+
+    <link rel="icon" type="image/png" href="/static/images/RF.png"/> <!-- Favicon -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+    <!-- Global stylesheet -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    {% block headContent %}{% endblock %}
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-pink">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">
+                <img src="/static/images/RF.png" alt="Rachelle Fabian Logo" width="30" height="30" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Projects
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('snow_report') }}">Snow Report</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="https://www.linkedin.com/in/rachelle-fabian-a4090a330" target="_blank" class="mx-1">
+                    <i class="bi bi-linkedin" style="font-size: 1.4rem; color: #0A66C2;"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow-1">
+        {% block main %}{% endblock %}
+    </main>
+    <footer class="d-flex justify-content-center align-items-center">
+        <p>&copy; 2025 Rachelle Fabian. All rights reserved.</p>
+    </footer>
+</body>
+</html>

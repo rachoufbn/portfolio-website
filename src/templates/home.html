@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div class="banner-image">
+    <div class="text-shadow text-white">
+        <h1 class="fw-bold text-center">Rachelle Fabian</h1>
+        <h2 class="h5 text-center">Engineer | AI & Robotics | Digital Solutions</h2>
+    </div>
+</div>
+
+<div class="container mt-5">
+
+    <div class="row">
+
+        <div class="col-lg-8">
+
+            <h1 class="mb-3">&lt;/About Me&gt;</h1>
+
+            <p class="lead">
+                Engineering graduate from the University of Sussex focused on computer vision, robotics, and embedded systems.
+                Experienced with Python/C++, PyTorch, and YOLO; comfortable with kinematics,
+                control, and deploying real-time perception on embedded platforms. Multilingual,
+                proactive, and motivated to build AI-driven solutions with real-world impact.
+            </p>
+
+            <hr class="my-4">
+
+            <h2 class="h4 mb-3">Highlighted Projects</h2>
+
+            <div class="d-grid gap-3">
+            
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">5-Bar Planar Parallel Robot</h3>
+                        <p class="mb-2">
+                            Derived and implemented forward/inverse kinematics for a vision-guided pick-and-place manipulator;
+                            simulated in MATLAB and built a small-scale model with servos.
+                        </p>
+                        <a class="btn btn-sm btn-outline-primary" href="https://github.com/rachoufbn/5-Bar-Planar-Robot" target="_blank">GitHub: 5-Bar Robot</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="h5 card-title">UAV Object Detection (YOLO11)</h3>
+                        <p class="mb-2">
+                            End-to-end pipeline: dataset creation, training & hyperparameter selection, and deployment via
+                            inference scripts for UAV imagery; documented with proper Git workflows.
+                        </p>
+                        <a class="btn btn-sm btn-outline-primary" href="https://github.com/rachoufbn/probe-detection-with-deep-learning-yolo11" target="_blank">GitHub: UAV Detection</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h2 class="h5 card-title">Get to know me</h2>
+                    <ul class="list-unstyled mb-0">
+                        <li><b>Location:</b> Switzerland / United Kingdom</li>
+                        <li><b>Languages:</b> Bilingual English & French, German, Spanish, Slovak</li>
+                        <li><b>Core Stack:</b> Python, C++, PyTorch, YOLO, ROS, MATLAB.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary" href="\static\docs\RachelleFABIAN_CV.pdf" target="_blank">
+                    Download CV (PDF)
+                </a>
+                <a class="btn btn-outline-secondary" href="mailto:rachelle.ef.mail@gmail.com">Email Me</a>
+                <a class="btn btn-outline-secondary" href="https://www.linkedin.com/in/rachelle-fabian-a4090a330" target="_blank">LinkedIn</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

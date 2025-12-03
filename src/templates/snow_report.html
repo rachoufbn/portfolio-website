@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block headContent %}
+    <script src="/static/js/snow_report/searchBar.class.js"></script>
+    <script src="/static/js/snow_report/main.js"></script>
+{% endblock %}
+
+{% block main %}
+<div class="container py-4">
+    <h1 class="mb-1">Snow Report (Switzerland)</h1>
+    <p class="text-muted">Live data scraped from <a href="https://www.bergfex.com/">Bergfex</a></p>
+
+    <!-- Search Bar -->
+    <div class="input-group">
+        <input
+            id="search-input"
+            type="text"
+            class="form-control"
+            placeholder="Search resort..."
+            autocomplete="off"
+        >
+        <select id="region-filter" class="form-select" style="flex-grow: 0.2; min-width: 120px;">
+            <option value="">All regions</option>
+        </select>
+    </div>
+    
+    <hr class="my-3">
+
+    <div id="snow-reports" class="row row-gap-3">
+        <div class="col-12 text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading snow reports...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="snow-report-card-template">
+    <div class="col-12 col-lg-6">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                    <h5 class="card-title"></h5>
+                    <h6 class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;"></h6>
+                    <div>Snow Valley: <span class="snow_valley_cm"></span></div>
+                    <div>Snow Mountain: <span class="snow_mountain_cm"></span></div>
+                    <div>New Snow: <span class="new_snow_cm"></span></div>
+                    <div>Lifts Open: <span class="lifts_open"></span></div>
+                </div>
+                <a href="#" target="_blank" class="btn btn-sm btn-info w-100 mt-2">See More</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+{% endblock %}
