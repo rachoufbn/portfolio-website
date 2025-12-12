@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener('load', () => {
 
     window.searchInput = document.getElementById("search-input");
     window.regionSelect = document.getElementById("region-filter");
@@ -21,12 +21,12 @@ window.onload = () => {
         }
     });
 
-};
+});
 
 async function loadSnowData(){
 
     try {
-        const response = await fetch("/api/snow_report");
+        const response = await fetch("api/get_report");
 
         if(!response.ok)
             throw new Error("Server Error: " + response.statusText);

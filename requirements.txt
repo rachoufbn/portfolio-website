@@ -1,5 +1,4 @@
 flask~=3.1.2
 gunicorn~=23.0.0
-#pandas - cannot be installed in this image 
-requests
-beautifulsoup4
+requests~=2.32.0
+beautifulsoup4~=4.14.0
