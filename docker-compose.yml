@@ -1,8 +1,44 @@
-services:
+volumes:
+    mysql_data:
 
-  webserver:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '80:80'
+networks:
+    db:
+
+services:
+    webserver:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - '80:80'
+        environment:
+            DB_HOST: ${DB_HOST}
+            DB_PORT: ${DB_PORT}
+            MEETING_NOTES_BOT_DB_PASS: ${MEETING_NOTES_BOT_DB_PASS}
+            ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+        networks:
+            - db
+        depends_on:
+            db:
+                condition: service_healthy
+        restart: always
+        
+    db:
+        image: mysql:8.0
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MEETING_NOTES_BOT_DB_PASS: ${MEETING_NOTES_BOT_DB_PASS}
+        volumes:
+            # Persist database data
+            - mysql_data:/var/lib/mysql
+            # Optional: Initialize database with schema
+            - ./databases:/docker-entrypoint-initdb.d
+        networks:
+            - db
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+            interval: 10s
+            timeout: 5s
+            retries: 5
+            start_period: 30s
+        restart: always

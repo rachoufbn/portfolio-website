@@ -1,33 +1,38 @@
 volumes:
-  caddy-data:
-  caddy-config:
+    caddy-data:
+    caddy-config:
 
 networks:
-  proxy:
+    proxy:
 
 services:
 
-  caddy:
-    image: caddy:2-alpine
-    volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - caddy-data:/data
-      - caddy-config:/config
-    ports:
-      - '80:80'
-      - '443:443'
-    networks:
-      - proxy
-    restart: unless-stopped
+    caddy:
+        image: caddy:2-alpine
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - caddy-data:/data
+            - caddy-config:/config
+        ports:
+            - '80:80'
+            - '443:443'
+        networks:
+            - proxy
+        restart: unless-stopped
 
-  webserver:
-    volumes:
-      - ./src:/app # On local, mount source code for quick iteration
-    ports: !override [] # Do not listen on any port for local (handled by caddy)
-    environment:
-      - PYTHONDONTWRITEBYTECODE=1
-      - PYTHONUNBUFFERED=1
-      - FLASK_APP=main.py
-    command: "flask run --host=0.0.0.0 --port=80 --debug --reload" # On local, we override the command and run flask dev server
-    networks:
-      - proxy
+    webserver:
+        volumes:
+            - ./src:/app # On local, mount source code for quick iteration
+        ports: !override [] # Do not listen on any port for local (handled by caddy)
+        environment:
+            - PYTHONDONTWRITEBYTECODE=1
+            - PYTHONUNBUFFERED=1
+            - FLASK_APP=main.py
+        command: "flask run --host=0.0.0.0 --port=80 --debug --reload" # On local, we override the command and run flask dev server
+        networks:
+            - proxy
+
+    db:
+        ports:
+            # Expose MySQL port for external access
+            - '3306:3306'
