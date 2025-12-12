@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block headContent %}
+    <script src="/static/js/SearchBar.class.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/account.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/meeting_notes_bot.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/index.js"></script>
+    <link rel="stylesheet" href="/projects/meeting_notes_bot/static/css/index.css">
+{% endblock %}
+
+{% block main %}
+<div class="container py-4">
+
+    <div class="d-flex justify-content-end mb-3">
+        {% include "meeting_notes_bot/_account_button.html" %}
+    </div>
+
+    <h1 class="mb-3">Meeting Notes Generator</h1>
+
+    <p class="mb-5">
+        Please upload your Microsoft Teams meeting transcript and get AI-generated meeting notes instantly.
+        Supports .vtt transcript files. No admin approval needed - just export your transcript from Teams and upload it here.
+        We currently only support Teams, however support for Zoom, Amazon Chime and others is coming soon!
+    </p>
+
+    <!-- Meetings Table Section -->
+    <div class="mb-4">
+
+        <div class="input-group mb-3">
+
+            <input type="text" class="form-control" id="meetingSearch" placeholder="Search meetings...">
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadMeetingModal">
+                <i class="bi bi-plus-circle"></i> Upload Meeting
+            </button>
+
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Meeting Name</th>
+                        <th>Meeting Time and Date</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="meetingsTableBody">
+                {% for m in meetings %}
+                    <tr onclick="window.location.href='/projects/meeting_notes_bot/meetings/{{ m.id }}'" style="cursor: pointer;" data-title="{{ m.title|e }}" data-timestamp="{{ m.timestamp|e }}">
+                        <td>{{ m.title|e }}</td>
+                        <td>{{ m.timestamp|e }}</td>
+                        <td class="text-end">
+                            <button class="btn btn-danger btn-sm deleteMeetingButton" data-meeting-id="{{ m.id }}" data-meeting-title="{{ m.title|e }}" onclick="event.stopPropagation();">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div id="meetingsTablePlaceholder" class="text-center text-muted mt-5 {% if meetings and meetings|length > 0 %}d-none{% endif %}">No meetings added yet. Upload a meeting to get started.</div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Upload Meeting Modal -->
+<div class="modal fade" id="uploadMeetingModal" tabindex="-1" aria-labelledby="uploadMeetingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadMeetingModalLabel">Upload Meeting</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="uploadMeetingForm">
+
+                    <div class="mb-3">
+                        <label for="meetingTitle" class="form-label">Meeting Title</label>
+                        <input type="text" class="form-control" id="meetingTitle" name="title" placeholder="Another Meeting That Could've Been an Email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="meetingDateTime" class="form-label">Meeting Time and Date</label>
+                        <input type="datetime-local" class="form-control" id="meetingDateTime" name="timestamp" required>
+                    </div>
+
+                    <div class="mb-5">
+                        <label for="transcriptFile" class="form-label">Meeting Transcript</label>
+                        <input type="file" class="form-control" id="transcriptFile" name="transcriptFile" accept=".vtt" required>
+                        <div class="form-text">
+                            Upload transcript from Teams (in .vtt format)
+                            <a href="#" data-bs-toggle="collapse" data-bs-target="#howToExport">How to export transcript from Teams?</a>
+                        </div>
+                        <div id="howToExport" class="collapse mt-2 alert alert-info">
+                            <b>To export transcript from Teams:</b>
+                            <ol class="mb-0">
+                                <li>Open Microsoft Teams and go to <b>Calendar</b>.</li>
+                                <li>Click on the meeting you attended.</li>
+                                <li>Go to <b>Recording & transcript</b> tab.</li>
+                                <li>Click the <b>Download</b> button.</li>
+                                <li>Choose <b>.vtt</b> format.</li>
+                            </ol>
+                            <small class="text-muted">Note: Only meeting organisers can download transcripts by default.</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary d-block w-100">Upload</button>
+
+                    <div id="uploadMeetingResponse" class="mt-3 d-none alert alert-danger"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "meeting_notes_bot/_account_modal.html" %}
+
+{% endblock %}

@@ -1,0 +1,48 @@
+<!-- Account Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="accountModalLabel">
+                    <i class="bi bi-person-circle me-2"></i>Account Details
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="accountForm">
+                    <div class="mb-3">
+                        <label for="accountName" class="form-label">
+                            <i class="bi bi-person me-1"></i>Name
+                        </label>
+                        <input type="text" class="form-control" id="accountName" name="name" value="{{ user_data.name|e }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="accountEmail" class="form-label">
+                            <i class="bi bi-envelope me-1"></i>Email
+                        </label>
+                        <input type="email" class="form-control" id="accountEmail" name="email" value="{{ user_data.email|e }}" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="accountDefaultPrompt" class="form-label">
+                            <i class="bi bi-chat-left-text me-1"></i>Default meeting notes Prompt
+                        </label>
+                        <textarea class="form-control" id="accountDefaultPrompt" name="default_prompt" rows="8" placeholder="Enter your default prompt for meeting notes generation...">{{ user_data.default_prompt|e }}</textarea>
+                        <div class="form-text">This prompt will be used when generating meeting notes from transcripts.</div>
+                    </div>
+                    <div id="accountMessage" class="alert d-none" role="alert"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-circle me-1"></i>Close
+                </button>
+                <button type="button" class="btn btn-primary" id="saveAccountBtn">
+                    <i class="bi bi-check-circle me-1"></i>Save Changes
+                </button>
+                <button type="button" class="btn btn-danger" id="logoutBtn">
+                    <i class="bi bi-box-arrow-right me-1"></i>Log Out
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

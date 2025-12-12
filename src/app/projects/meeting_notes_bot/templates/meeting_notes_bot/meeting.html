@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block headContent %}
+
+    <script id="app-data-meeting" type="application/json">{{ meeting|tojson }}</script>
+
+    <script src="/projects/meeting_notes_bot/static/js/account.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/meeting_notes_bot.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/meeting.js"></script>
+    <link rel="stylesheet" href="/projects/meeting_notes_bot/static/css/meeting.css">
+{% endblock %}
+
+{% block main %}
+<div class="container py-4">
+
+    <div class="d-flex align-items-start justify-content-between mb-4">
+        <div>
+            <h1 class="d-inline me-2">Meeting: <span>{{ meeting.title|e }}</span></h1>
+            <span class="text-muted">{{ meeting.timestamp|e }}</span>
+        </div>
+        <div class="d-flex align-items-stretch gap-2">
+            <a class="btn btn-outline-secondary d-flex align-items-center" href="{{ url_for('meeting_notes_bot.index') }}">
+                <i class="bi bi-arrow-left me-1"></i> Back to meetings
+            </a>
+            {% include "meeting_notes_bot/_account_button.html" %}
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between" style="min-height: 50px">
+                    <span class="fw-semibold">Chat</span>
+                </div>
+                <div class="card-body d-flex flex-column" style="min-height: 420px;">
+                    <div id="chatHistory" class="flex-grow-1 overflow-auto mb-3 border rounded p-3 bg-light"></div>
+                    <form id="chatForm" class="d-flex gap-2">
+                        <input type="text" class="form-control" id="chatInput" placeholder="Ask a question about this meeting..." autocomplete="off" required>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <div class="card h-100">
+                <div class="card-header d-flex align-items-center justify-content-between" style="min-height: 50px">
+                    <span class="fw-semibold">Notes</span>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="downloadNotesBtn">
+                        <i class="bi bi-download"></i> Download
+                    </button>
+                </div>
+                <div class="card-body" style="min-height: 420px;">
+                    <div id="notesContent" class="border rounded p-3 bg-light h-100" style="white-space: pre-wrap;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% include "meeting_notes_bot/_account_modal.html" %}
+
+{% endblock %}

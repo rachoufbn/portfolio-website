@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block headContent %}
+    <script src="/projects/meeting_notes_bot/static/js/meeting_notes_bot.js"></script>
+    <script src="/projects/meeting_notes_bot/static/js/login.js"></script>
+    <link rel="stylesheet" href="/projects/meeting_notes_bot/static/css/login.css">
+{% endblock %}
+
+{% block main %}
+<div class="container py-4">
+
+    <h1 class="text-center mb-3">Meeting Notes Generator</h1>
+
+    <p class="text-center mb-5">
+        A powerful tool to generate AI-powered meeting notes from your Microsoft Teams meeting transcripts.
+    </p>
+
+    <div class="d-flex flex-column align-items-center">
+
+        <div class="btn-group mb-4" role="group" aria-label="Login or Sign Up">
+            <input type="radio" class="btn-check" name="menuSelectRadio" id="loginMenuButton" autocomplete="off" data-target="#loginMenu">
+            <label class="btn btn-outline-primary" for="loginMenuButton">Login</label>
+
+            <input type="radio" class="btn-check" name="menuSelectRadio" id="signupMenuButton" autocomplete="off" data-target="#signupMenu" checked>
+            <label class="btn btn-outline-primary" for="signupMenuButton">Sign Up</label>
+        </div>
+
+        <div class="w-100" style="max-width: 500px">
+            <div class="card">
+                <div class="card-body">
+
+                    <div id="loginMenu" class="d-none">
+
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="loginEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="loginEmail" name="email" placeholder="johndoe@example.com" required>
+                            </div>
+                            <div class="mb-4">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="loginPassword" name="password" required>
+                            </div>
+                            <div id="loginError" class="mb-3 text-danger d-none" role="alert"></div>
+                            <button type="submit" class="btn btn-primary d-block w-100">Login</button>
+                        </form>
+
+                    </div>
+
+                    <div id="signupMenu">
+
+                        <form id="signupForm">
+                            <div class="mb-3">
+                                <label for="signupName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="signupName" name="name" placeholder="John Doe" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="signupEmail" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="signupEmail" name="email" placeholder="johndoe@example.com" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="signupPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="signupPassword" name="password" minlength="8" required>
+                            </div>
+                            <small class="d-block text-muted mb-3">
+                                Password must be at least 8 characters long.
+                            </small>
+                            <div class="mb-4">
+                                <label for="signupConfirmPassword" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="signupConfirmPassword" name="confirmPassword" minlength="8" required>
+                            </div>
+                            <div id="signupError" class="mb-3 text-danger d-none" role="alert"></div>
+                            <button type="submit" class="btn btn-success d-block w-100">Sign Up</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
