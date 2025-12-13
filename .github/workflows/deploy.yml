@@ -1,0 +1,78 @@
+name: Deploy to AWS Lightsail
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+permissions:
+  id-token: write # Required for OIDC authentication
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
+  LIGHTSAIL_SERVICE_NAME: ${{ vars.AWS_LIGHTSAIL_SERVICE_NAME }}
+
+jobs:
+  deploy:
+    name: Build and Deploy to Lightsail
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install lightsailctl
+        run: |
+          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o lightsailctl
+          chmod +x ./lightsailctl
+
+      - name: Deploy to Lightsail with docker-compose
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MEETING_NOTES_BOT_DB_PASS: ${{ secrets.MEETING_NOTES_BOT_DB_PASS }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          ./lightsailctl push \
+            --service-name $LIGHTSAIL_SERVICE_NAME \
+            --container-name webserver \
+            --source . \
+            --docker-compose-file docker-compose.yml \
+            --docker-compose-file docker-compose.aws.yml \
+            --public
+
+      ### Disabled wait step for now - saves github runner minutes
+
+      #     echo "⏳ Waiting for deployment to complete..."
+      #     echo "This usually takes 3-5 minutes."
+          
+      #     # Wait for deployment to be active (max 15 minutes)
+      #     for i in {1..30}; do
+      #       STATE=$(aws lightsail get-container-services \
+      #         --service-name $LIGHTSAIL_SERVICE_NAME \
+      #         --query 'containerServices[0].state' \
+      #         --output text)
+            
+      #       if [ "$STATE" = "RUNNING" ]; then
+      #         echo "✅ Deployment successful!"
+      #         break
+      #       elif [ "$STATE" = "PENDING" ] || [ "$STATE" = "DEPLOYING" ]; then
+      #         echo "   Status: $STATE (attempt $i/30)"
+      #         sleep 30
+      #       else
+      #         echo "❌ Deployment failed with state: $STATE"
+      #         exit 1
+      #       fi
+      #     done
