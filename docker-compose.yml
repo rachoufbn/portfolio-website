@@ -9,13 +9,14 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
-        ports:
-            - '80:80'
         environment:
-            DB_HOST: ${DB_HOST}
-            DB_PORT: ${DB_PORT}
+            DB_HOST: db
+            DB_PORT: 3306
             MEETING_NOTES_BOT_DB_PASS: ${MEETING_NOTES_BOT_DB_PASS}
             ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+            # Python optimizations
+            PYTHONDONTWRITEBYTECODE: 1
+            PYTHONUNBUFFERED: 1
         networks:
             - db
         depends_on:
@@ -31,7 +32,7 @@ services:
         volumes:
             # Persist database data
             - mysql_data:/var/lib/mysql
-            # Optional: Initialize database with schema
+            # Initialize database with schema
             - ./databases:/docker-entrypoint-initdb.d
         networks:
             - db

@@ -1,3 +1,10 @@
+# This override file is for local development environment
+# - It mounts source code into the webserver container for easy iteration
+# - It exposes MySQL port for external access
+# - It runs Flask development server instead of gunicorn
+# - It uses Caddy as a reverse proxy for local HTTPS support
+# Used with: `docker compose`, this override is applied automatically
+
 volumes:
     caddy-data:
     caddy-config:
@@ -23,10 +30,7 @@ services:
     webserver:
         volumes:
             - ./src:/app # On local, mount source code for quick iteration
-        ports: !override [] # Do not listen on any port for local (handled by caddy)
         environment:
-            - PYTHONDONTWRITEBYTECODE=1
-            - PYTHONUNBUFFERED=1
             - FLASK_APP=main.py
         command: "flask run --host=0.0.0.0 --port=80 --debug --reload" # On local, we override the command and run flask dev server
         networks:
