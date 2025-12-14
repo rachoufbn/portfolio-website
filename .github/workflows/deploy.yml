@@ -10,13 +10,12 @@ permissions:
   id-token: write # Required for OIDC authentication
   contents: read
 
+# Prevent concurrent deployments on the same branch
 concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  AWS_REGION: ${{ vars.AWS_REGION }}
-  AWS_ROLE_ARN: ${{ vars.AWS_ROLE_ARN }}
   LIGHTSAIL_SERVICE_NAME: ${{ vars.AWS_LIGHTSAIL_SERVICE_NAME }}
 
 jobs:
@@ -31,27 +30,40 @@ jobs:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ env.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Install lightsailctl
+      - name: Build Docker image
         run: |
-          curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o lightsailctl
-          chmod +x ./lightsailctl
+          docker compose build
 
-      - name: Deploy to Lightsail with docker-compose
+      - name: Create Lightsail deployment files
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           MEETING_NOTES_BOT_DB_PASS: ${{ secrets.MEETING_NOTES_BOT_DB_PASS }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          ./lightsailctl push \
+          envsubst < .lightsail/containers.json > containers.json
+          cp .lightsail/public-endpoint.json public-endpoint.json
+
+      - name: Install lightsailctl plugin
+        run: |
+          sudo curl "https://s3.us-west-2.amazonaws.com/lightsailctl/latest/linux-amd64/lightsailctl" -o "/usr/local/bin/lightsailctl"
+          sudo chmod +x /usr/local/bin/lightsailctl
+
+      - name: Push image to Lightsail
+        run: |
+          aws lightsail push-container-image \
             --service-name $LIGHTSAIL_SERVICE_NAME \
-            --container-name webserver \
-            --source . \
-            --docker-compose-file docker-compose.yml \
-            --docker-compose-file docker-compose.aws.yml \
-            --public
+            --label webserver \
+            --image rachellefabian-webserver:latest
+
+      - name: Deploy to Lightsail
+        run: |
+          aws lightsail create-container-service-deployment \
+            --service-name $LIGHTSAIL_SERVICE_NAME \
+            --containers file://containers.json \
+            --public-endpoint file://public-endpoint.json
 
       ### Disabled wait step for now - saves github runner minutes
 

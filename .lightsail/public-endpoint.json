@@ -1,0 +1,12 @@
+{
+  "containerName": "webserver",
+  "containerPort": 80,
+  "healthCheck": {
+    "healthyThreshold": 2,
+    "unhealthyThreshold": 2,
+    "timeoutSeconds": 10,
+    "intervalSeconds": 30,
+    "path": "/",
+    "successCodes": "200-499"
+  }
+}
