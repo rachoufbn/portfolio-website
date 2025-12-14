@@ -1,14 +1,37 @@
 volumes:
+    caddy-data:
+    caddy-config:
     mysql_data:
 
 networks:
     db:
+    proxy:
 
 services:
+
+    # Caddy reverse proxy for handling HTTPS/SSL termination
+    caddy:
+        image: caddy:2-alpine
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - caddy-data:/data
+            - caddy-config:/config
+        ports:
+            - '80:80'
+            - '443:443'
+        networks:
+            - proxy
+        restart: unless-stopped
+
     webserver:
         build:
             context: .
             dockerfile: Dockerfile
+        # On local, we override the command and run flask dev server
+        command: "flask run --host=0.0.0.0 --port=80 --debug --reload"
+        # On local, mount source code for quick iteration
+        volumes:
+            - ./src:/app
         environment:
             DB_HOST: db
             DB_PORT: 3306
@@ -17,8 +40,11 @@ services:
             # Python optimizations
             PYTHONDONTWRITEBYTECODE: 1
             PYTHONUNBUFFERED: 1
+            # Local Only - Flask settings
+            FLASK_APP: main.py
         networks:
             - db
+            - proxy
         depends_on:
             db:
                 condition: service_healthy
@@ -42,4 +68,7 @@ services:
             timeout: 5s
             retries: 5
             start_period: 30s
+        # Expose MySQL port for external access
+        ports:
+            - '3306:3306'
         restart: always
