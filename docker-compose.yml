@@ -24,6 +24,7 @@ services:
         restart: unless-stopped
 
     webserver:
+        image: portfolio-website-webserver:latest # Image name for deployment
         build:
             context: .
             dockerfile: Dockerfile

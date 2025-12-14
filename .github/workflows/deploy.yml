@@ -56,7 +56,7 @@ jobs:
           aws lightsail push-container-image \
             --service-name $LIGHTSAIL_SERVICE_NAME \
             --label webserver \
-            --image rachellefabian-webserver:latest
+            --image portfolio-website-webserver:latest
 
       - name: Deploy to Lightsail
         run: |
