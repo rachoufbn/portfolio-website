@@ -1,5 +1,6 @@
 from flask import Blueprint, g
 from .services.repository.database import DatabaseService
+from .services.repository.schema_migrations import apply_migrations
 from .services.auth import AuthService
 import os
 
@@ -18,19 +19,14 @@ api_bp = Blueprint(
     template_folder=None,
     static_folder=None
 )   
-    
+
 db_path = os.getenv('MEETING_NOTES_BOT_DB_PATH')
-init_schema_path = os.path.join(os.path.dirname(__file__), 'init.sqlite')
 
-def init_db():
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
-    db = DatabaseService(db_path)
-    with open(init_schema_path) as f:
-        db.connection.executescript(f.read())
-    db.destroy()
-
-# Make sure the database is initialized at app startup
-init_db()
+# Apply any pending migrations at server startup
+db = DatabaseService(db_path)
+migrations_dir = os.path.join(os.path.dirname(__file__), 'database_migrations')
+apply_migrations(db, migrations_dir)
+db.destroy()
 
 def _register_db_hooks(blueprint):
     """Attach per-request db/auth lifecycle handlers to a blueprint."""
