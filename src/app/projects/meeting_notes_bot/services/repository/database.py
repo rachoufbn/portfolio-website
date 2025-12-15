@@ -6,7 +6,7 @@ class DatabaseService:
     def __init__(self, db_path):
         """Create a new connection for this request."""
 
-        self.connection = sqlite3.connect(db_path)
+        self.connection = sqlite3.connect(db_path, timeout=10.0)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute('PRAGMA foreign_keys = ON')
     

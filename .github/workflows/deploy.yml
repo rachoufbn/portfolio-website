@@ -39,9 +39,8 @@ jobs:
 
       - name: Create Lightsail deployment files
         env:
-          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-          MEETING_NOTES_BOT_DB_PASS: ${{ secrets.MEETING_NOTES_BOT_DB_PASS }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MEETING_NOTES_BOT_DB_PATH: ${{ secrets.MEETING_NOTES_BOT_DB_PATH }}
         run: |
           envsubst < .lightsail/containers.json > containers.json
           cp .lightsail/public-endpoint.json public-endpoint.json

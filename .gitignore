@@ -2,4 +2,4 @@
 .DS_Store
 __pycache__/
 flask_session/
-databases/portfolio-website.db
+src/databases/portfolio-website.db
