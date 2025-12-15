@@ -17,11 +17,11 @@ class NotesService:
         query = """
             INSERT INTO notes (meeting_id, version, notes)
             SELECT
-                %s,
+                ?,
                 COALESCE(MAX(version) + 1, 1) AS next_version,
-                %s
+                ?
             FROM notes
-            WHERE meeting_id = %s
+            WHERE meeting_id = ?
         """
         self.db.insert(query, (self.meeting_id, notes, self.meeting_id))
 
@@ -30,16 +30,16 @@ class NotesService:
         if(version):
             query = """
                 SELECT * FROM notes
-                WHERE meeting_id = %s
-                  AND version = %s
+                WHERE meeting_id = ?
+                  AND version = ?
             """
             return self.db.fetchOne(query, (self.meeting_id, version))
         else:
             query = """
                 SELECT * FROM notes
-                WHERE meeting_id = %s
-                ORDER BY n.version DESC
+                WHERE meeting_id = ?
+                ORDER BY version DESC
                 LIMIT 1
             """
-            return self.db.fetchOne(query, (self.meeting_id))
+            return self.db.fetchOne(query, (self.meeting_id,))
     

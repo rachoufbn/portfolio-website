@@ -1,10 +1,8 @@
 volumes:
     caddy-data:
     caddy-config:
-    mysql_data:
 
 networks:
-    db:
     proxy:
 
 services:
@@ -34,9 +32,7 @@ services:
         volumes:
             - ./src:/app
         environment:
-            DB_HOST: db
-            DB_PORT: 3306
-            MEETING_NOTES_BOT_DB_PASS: ${MEETING_NOTES_BOT_DB_PASS}
+            MEETING_NOTES_BOT_DB_PATH: /app/databases/portfolio-website.db
             ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
             # Python optimizations
             PYTHONDONTWRITEBYTECODE: 1
@@ -44,32 +40,5 @@ services:
             # Local Only - Flask settings
             FLASK_APP: main.py
         networks:
-            - db
             - proxy
-        depends_on:
-            db:
-                condition: service_healthy
-        restart: always
-        
-    db:
-        image: mysql:8.0
-        environment:
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-            MEETING_NOTES_BOT_DB_PASS: ${MEETING_NOTES_BOT_DB_PASS}
-        volumes:
-            # Persist database data
-            - mysql_data:/var/lib/mysql
-            # Initialize database with schema
-            - ./databases:/docker-entrypoint-initdb.d
-        networks:
-            - db
-        healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
-            interval: 10s
-            timeout: 5s
-            retries: 5
-            start_period: 30s
-        # Expose MySQL port for external access
-        ports:
-            - '3306:3306'
         restart: always

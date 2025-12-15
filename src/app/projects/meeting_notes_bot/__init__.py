@@ -4,6 +4,8 @@ from .services.repository.database import DatabaseService
 from .services.auth import AuthService
 import os
 
+load_dotenv()
+
 bp = Blueprint(
     'meeting_notes_bot',
     __name__,
@@ -18,24 +20,27 @@ api_bp = Blueprint(
     url_prefix='/projects/meeting_notes_bot/api',
     template_folder=None,
     static_folder=None
-)
+)   
+    
+db_path = os.getenv('MEETING_NOTES_BOT_DB_PATH')
+init_schema_path = os.path.join(os.path.dirname(__file__), 'init.sqlite')
 
-load_dotenv()
+def init_db():
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+    db = DatabaseService(db_path)
+    with open(init_schema_path) as f:
+        db.connection.executescript(f.read())
+    db.destroy()
 
-DatabaseService.initialize_pool(
-    host=os.getenv('DB_HOST'),
-    port=int(os.getenv('DB_PORT')),
-    user='meeting_notes_bot',
-    password=os.getenv('MEETING_NOTES_BOT_DB_PASS'),
-    database='meeting_notes_bot'
-)
+# Make sure the database is initialized at app startup
+init_db()
 
 def _register_db_hooks(blueprint):
     """Attach per-request db/auth lifecycle handlers to a blueprint."""
 
     @blueprint.before_request
     def before_request():
-        g.database = DatabaseService()
+        g.database = DatabaseService(db_path)
         g.auth_service = AuthService(g.database)
 
     @blueprint.teardown_request

@@ -1,70 +1,40 @@
-from dbutils.pooled_db import PooledDB
-import pymysql
-from pymysql.cursors import DictCursor
+import sqlite3
 
 class DatabaseService:
-    """Database service with connection pooling."""
+    """Database service with per-request connections."""
 
-    _pool = None
-    
-    @classmethod
-    def initialize_pool(cls, host, port, user, password, database, 
-                       min_connections=1, max_connections=10):
-        """Initialize the connection pool at app startup."""
-        if cls._pool is None:
-            cls._pool = PooledDB(
-                creator=pymysql,
-                mincached=min_connections,
-                maxcached=max_connections,
-                maxconnections=max_connections,
-                blocking=True,  # Wait if no connections available
-                host=host,
-                port=port,
-                user=user,
-                password=password,
-                database=database,
-                charset='utf8mb4',
-                cursorclass=DictCursor
-            )
+    def __init__(self, db_path):
+        """Create a new connection for this request."""
 
-
-    def __init__(self):
-        """Get a connection from the pool."""
-
-        if self._pool is None:
-            raise RuntimeError("Pool not initialized. Call initialize_pool() first.")
-        
-        self.connection = self._pool.connection()
+        self.connection = sqlite3.connect(db_path)
+        self.connection.row_factory = sqlite3.Row
+        self.connection.execute('PRAGMA foreign_keys = ON')
     
     def fetchAll(self, query, params=None):
-        
-        with self.connection.cursor() as cursor:                
-            cursor.execute(query, params or ())
-            return cursor.fetchall()
+        cursor = self.connection.cursor()
+        cursor.execute(query, params or ())
+        return [dict(row) for row in cursor.fetchall()]
 
     def fetchOne(self, query, params=None):
-        
-        with self.connection.cursor() as cursor:
-            cursor.execute(query, params or ())
-            return cursor.fetchone()
+        cursor = self.connection.cursor()
+        cursor.execute(query, params or ())
+        row = cursor.fetchone()
+        return dict(row) if row else None
 
     def insert(self, query, params=None):
-    
-        with self.connection.cursor() as cursor:
-            cursor.execute(query, params or ())
-            self.connection.commit()
-            return cursor.lastrowid
+        cursor = self.connection.cursor()
+        cursor.execute(query, params or ())
+        self.connection.commit()
+        return cursor.lastrowid
         
     def execute(self, query, params=None):
-    
-        with self.connection.cursor() as cursor:
-            cursor.execute(query, params or ())
-            self.connection.commit()
-            return cursor.rowcount
+        cursor = self.connection.cursor()
+        cursor.execute(query, params or ())
+        self.connection.commit()
+        return cursor.rowcount
         
     def destroy(self):
-        """Returns connection to pool (doesn't actually close it)."""
-
+        """Close the connection."""
         if self.connection:
-            self.connection.close() # Returns to pool
+            self.connection.close()
             self.connection = None

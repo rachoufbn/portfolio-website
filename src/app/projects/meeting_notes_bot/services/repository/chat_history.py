@@ -14,25 +14,24 @@ class ChatHistoryService:
         
     # Fetch full chat history
     def get(self):
-        query = "SELECT * FROM chat_history WHERE meeting_id = %s;"
-        return self.db.fetchAll(query, (self.meeting_id))
+        query = "SELECT * FROM chat_history WHERE meeting_id = ?;"
+        return self.db.fetchAll(query, (self.meeting_id,))
 
     # Insert chat history item
     def insert(self, role, content, notes_version):
         query = """
             INSERT INTO chat_history (meeting_id, role, content, notes_version)
-            VALUES (%s, %s, %s, %s)
-            WHERE meeting_id = %s
+            VALUES (?, ?, ?, ?)
         """
-        chat_history_id = self.db.insert(query, (self.meeting_id, role, content, notes_version, self.meeting_id))
+        chat_history_id = self.db.insert(query, (self.meeting_id, role, content, notes_version))
         return chat_history_id
 
     # Delete chat history back to (and including) specified id
     def delete(self, chat_history_id):
         query = """
             DELETE FROM chat_history
-            WHERE id >= %s
-              AND meeting_id = %s
+            WHERE id >= ?
+              AND meeting_id = ?
         """
         affected_row_count = self.db.execute(query, (chat_history_id, self.meeting_id))
         return affected_row_count

@@ -9,7 +9,7 @@ class MeetingsService:
     def create(self, title: str, timestamp, transcript: str):
         query = """
             INSERT INTO meetings (title, timestamp, transcript, user_id)
-            VALUES (%s, %s, %s, %s);
+            VALUES (?, ?, ?, ?);
         """
         meeting_id = self.db.insert(query, (title, timestamp, transcript, self.user_id))
         return meeting_id
@@ -17,24 +17,24 @@ class MeetingsService:
     def update(self, meeting_id: int, title: str, timestamp):
         query = """
             UPDATE meetings
-            SET title = %s, timestamp = %s
-            WHERE id = %s AND user_id = %s;
+            SET title = ?, timestamp = ?
+            WHERE id = ? AND user_id = ?;
         """
         affected_row_count = self.db.execute(query, (title, timestamp, meeting_id, self.user_id))
         return affected_row_count
     
     def delete(self, meeting_id: int):
-        query = "DELETE FROM meetings WHERE id = %s AND user_id = %s;"
+        query = "DELETE FROM meetings WHERE id = ? AND user_id = ?;"
         affected_row_count = self.db.execute(query, (meeting_id, self.user_id))
         return affected_row_count
     
     def get(self, meeting_id: int = None):
         if(meeting_id):
-            query = "SELECT * FROM meetings WHERE id = %s AND user_id = %s;"
+            query = "SELECT * FROM meetings WHERE id = ? AND user_id = ?;"
             return self.db.fetchOne(query, (meeting_id, self.user_id))
         else:
-            query = "SELECT * FROM meetings WHERE user_id = %s;"
-            return self.db.fetchAll(query, (self.user_id))
+            query = "SELECT * FROM meetings WHERE user_id = ?;"
+            return self.db.fetchAll(query, (self.user_id,))
     
     def user_has_meeting(self, meeting_id: int):
 
