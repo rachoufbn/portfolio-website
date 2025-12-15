@@ -1,10 +1,7 @@
 from flask import Blueprint, g
-from dotenv import load_dotenv
 from .services.repository.database import DatabaseService
 from .services.auth import AuthService
 import os
-
-load_dotenv()
 
 bp = Blueprint(
     'meeting_notes_bot',
