@@ -1,15 +1,17 @@
 # Rachelle Fabian Portfolio website
 
+Available live on [rachellefabian.com](https://rachellefabian.com). (Containerised deployment using AWS Lightsail)
+
 ## Tech Stack
-- Python 3, Flask 3, MySQL 8, Docker
+- Python 3, Flask 3, SQLite, Docker, AWS
 - Python scraping with requests + BeautifulSoup
 - Frontend: vanilla JS, Bootstrap, simple search/filter utilities
 - Caddy reverse proxy (local TLS) for convenient local HTTPS
 - Anthropic Claude client wired for future AI features
+- AWS containerised deployment using Lightsail
 
 ## Quick Start
 1) Copy `.env.example` to `.env` in the repo root:
-    - Generate a random password for `MYSQL_ROOT_PASSWORD` and `MEETING_NOTES_BOT_DB_PASS`
     - For the meeting notes bot to work you will need to provide an `ANTHROPIC_API_KEY`
 2) Add `127.0.0.1 local.rachellefabian.com` to the hosts file on your computer
 3) Start the stack: `docker compose up -d --build`
